@@ -1121,8 +1121,6 @@
 		<script src="../../../../../../target/classes/js/components/AddReleaseYearForm.js" th:src="${RELEASE_YEAR_FORM_JS}"></script>
 		<script src="../../../../../../target/classes/js/components/AddCatalogPriceForm.js" th:src="${CATALOG_PRICE_FORM_JS}"></script>
 		<script src="../../../../../../target/classes/js/components/AddCatalogNumbersForm.js" th:src="${CATALOG_NUMBERS_FORM_JS}"></script>
-		<script src="../../../../../../target/classes/js/components/SeriesSalesList.js" th:src="${SERIES_SALES_LIST_JS}"></script>
-
 
 		<script th:inline="javascript">
 			/*[+
@@ -1161,12 +1159,6 @@
 					't_add':          [[ #{t_add} ]]
 				}
 			};
-			var seriesSalesListProps = {
-				'url': [[ '__@{${INFO_SERIES_PAGE}(id=${series.id})}__' ]],
-				'l10n': {
-					't_server_error': [[ #{t_server_error} ]],
-				}
-			};
 			+]*/
 			
 			/*[- */
@@ -1184,17 +1176,10 @@
 				'url': '/series/100',
 				'l10n': {}
 			};
-
-			var seriesSalesListProps = {
-				'url': '/series/100',
-				'l10n': {}
-			};
 			/* -]*/
 			
 			renderComponent(AddCatalogPriceForm, addCatalogPriceProps, 'add-catalog-price');
 			renderComponent(AddCatalogNumbersForm, addCatalogNumbersProps, 'add-catalog-numbers');
-			renderComponent(SeriesSalesList, seriesSalesListProps, 'series-sales-list');
-
 			
 			/*[# th:if="${series.releaseYear == null}"]*/
 			/*[+
@@ -1217,6 +1202,39 @@
 			/*[- */
 			renderComponent(AddReleaseYearForm, addReleaseYearProps, 'add-release-year');
 			/* -]*/
+		</script>
+		<!--/*/
+		</th:block>
+		/*/-->
+		
+		<!--/*/
+		<th:block sec:authorize="hasAuthority('VIEW_SERIES_SALES')" togglz:active="USE_REACT">
+		/*/-->
+		<script src="../../../../../../target/classes/js/components/SeriesSalesList.js" th:src="${SERIES_SALES_LIST_JS}"></script>
+		
+		<script th:inline="javascript">
+			/*[+
+			var seriesSalesListProps = {
+				'url': [[ '__@{${INFO_SERIES_PAGE}(id=${series.id})}__' ]],
+				'l10n': {
+					't_server_error':       [[ #{t_server_error} ]],
+					't_who_selling_series': [[ #{t_who_selling_series} ]],
+					't_sold_to':            [[ #{t_sold_to} ]],
+					't_sold_for':           [[ #{t_sold_for} ]],
+					't_was_selling':        [[ #{t_was_selling} ]],
+					't_cancelled':          [[ #{t_cancelled} ]]
+				}
+			};
+			+]*/
+			
+			/*[- */
+			var seriesSalesListProps = {
+				'url': '/series/100',
+				'l10n': {}
+			};
+			/* -]*/
+			
+			renderComponent(SeriesSalesList, seriesSalesListProps, 'series-sales-list');
 		</script>
 		<!--/*/
 		</th:block>
